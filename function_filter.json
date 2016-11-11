@@ -1,0 +1,42 @@
+{
+    "minimum_function_size" : 10,
+    "function_size_metric" : "LOC_PATH",
+    "check_small_function_loops" : true,
+
+    "blacklist" : {
+        "function_filters" : [
+            ],
+        "file_filters" : [
+        ]
+    },
+    "whitelist": {
+        "file_filters" : [
+        ],
+        "function_filters" : {
+            "*" : {
+                "events" : [
+                    "function"
+
+                    ]
+
+            },
+            "increment_a" : {
+                "events" : [
+                    "function"
+                ]
+                },
+            "a*c" : {
+                "events" : [
+                        "function"
+                    ],
+                    "arguments" : "*"
+                },
+            "func_with_common_arg" : {
+                    "events" : [
+                        "function"
+                    ],
+                    "arguments" : [ 1 ]
+                }
+        }
+    }
+}
