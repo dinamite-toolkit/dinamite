@@ -8,7 +8,7 @@
 using namespace json11;
 using namespace std;
 
-#define INSFILT_DEBUG
+//#define INSFILT_DEBUG
 
 void InstrumentationFilter::loadFilterDataEnv() {
     const char * val = ::getenv("DIN_FILTERS");
@@ -114,7 +114,8 @@ bool InstrumentationFilter::checkFunctionFilter(string function_name,
 bool InstrumentationFilter::checkFunctionArgFilter(string function_name, int arg) {
     if (!loaded) return false; // don't print args if we haven't enabled it explicitly
 
-	Json argfilter = filters["whitelist"]["function_filters"][function_name]["arguments"];
+	string match_name = findBestFunctionMatch(function_name);
+	Json argfilter = filters["whitelist"]["function_filters"][match_name]["arguments"];
     if (argfilter.is_array()) {
         for (auto it : argfilter.array_items()) {
             if (it.int_value() == arg) {

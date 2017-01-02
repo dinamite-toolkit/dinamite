@@ -43,6 +43,9 @@ static bool __dinamite_exclude_tid(pid_t tid) {
 		return false;
 
 	orig = excluded_tids;
+	if (getenv("DINAMITE_EXCLUDE_TID") == NULL) { 
+        return false;
+    }
 	strncpy(excluded_tids, getenv("DINAMITE_EXCLUDE_TID"),
 		MAX_THREADS-1);
 	if(strlen(excluded_tids) < 1)
