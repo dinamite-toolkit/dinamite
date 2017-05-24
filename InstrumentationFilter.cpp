@@ -197,14 +197,16 @@ bool InstrumentationFilter::loopCheckEnabled() {
 
 bool InstrumentationFilter::checkFunctionSize(string function_name,
 					      size_t size) {
-	if (filters["minimum_function_size"].is_null()) {
-		return true;
-	}
+
 	if ((size > 0) && (functions.count(function_name) == 0)) {
 		/* Add to the list of encountered functions, mostly
 		 * used for mangled stuff
 		 */
 		functions[function_name] = size;
+	}
+
+	if (filters["minimum_function_size"].is_null()) {
+		return true;
 	}
 	if (size >= (size_t) filters["minimum_function_size"].int_value()) {
 #ifdef INSFILT_DEBUG
